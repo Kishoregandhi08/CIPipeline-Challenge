@@ -50,6 +50,22 @@ pipeline{
                 waitForQualityGate abortPipeline: true
             }
         }
+          stage('Deploy to artifactory'){
+        steps{
+        rtUpload(
+         serverId : 'artifactory-server',
+         spec :'''{
+           "files" :[
+           {
+           "pattern":"target/*.jar",
+           "target":"Art-mav-dev"
+           }
+           ]
+         }''',
+         
+      )
+       }
+     }
     }
     post {  
          always {  
