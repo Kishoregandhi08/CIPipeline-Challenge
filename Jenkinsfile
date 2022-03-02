@@ -66,6 +66,22 @@ pipeline{
       )
        }
      }
+      stage('download from artifactory')
+         {
+            steps{
+     
+                rtDownload (
+                    serverId: 'artifactory-server',
+                    spec: '''{
+                    "files": [
+                         {
+                             "pattern": "Art-mav-dev",
+                             "target": ""
+                        }
+                     ]
+                }''',
+				)
+     }}
     }
     post {  
          always {  
